@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 821492961}
   - component: {fileID: 821492960}
   - component: {fileID: 821492965}
+  - component: {fileID: 821492966}
   m_Layer: 0
   m_Name: ai
   m_TagString: Untagged
@@ -596,9 +597,32 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821492959}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17e4fe77aaf3e8d4d86d7f5c2a6cf25f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  distance: 1
+  targetsIdle:
+  - {fileID: 1054514148}
+  - {fileID: 1211507322}
+  - {fileID: 1606937364}
+  - {fileID: 467286888}
+  targetDrink: {fileID: 326125575}
+  targetFood: {fileID: 449233701}
+  targetSleep: {fileID: 1908280550}
+  targetFun: {fileID: 915981888}
+--- !u!114 &821492966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821492959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecef22027a7aa2438775c8f7c3095dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
