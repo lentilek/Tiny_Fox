@@ -30,10 +30,16 @@ public class AI : MonoBehaviour
     public GameObject targetFun;
 
     private bool waiting = false;
+    Animator m_Animator;
+    bool m_Walk = true;
+    bool m_Eat = false;
+    bool m_Sleep = false;
+    bool m_Fun = false;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        m_Animator = GetComponent<Animator>();
         target = targetsIdle[counter];
         drink = maxStat;
         food = maxStat;
@@ -90,11 +96,33 @@ public class AI : MonoBehaviour
             {
                 waiting = true;
                 StartCoroutine(DrinkMore());
+
+                if (m_Walk == true)
+                {
+                    m_Animator.SetBool("m_Walk", false);
+                    m_Walk = false;
+                }
+                if (m_Eat == false)
+                {
+                    m_Animator.SetBool("m_Eat", true);
+                    m_Eat = true;
+                }
             }
             else if (!waiting)
             {
                 isZero= 0;
                 StartCoroutine(DrinkLess());
+
+                if (m_Walk == false)
+                {
+                    m_Animator.SetBool("m_Walk", true);
+                    m_Walk = true;
+                }
+                if (m_Eat == true)
+                {
+                    m_Animator.SetBool("m_Eat", false);
+                    m_Eat = false;
+                }
             }
         }
     }
@@ -122,11 +150,33 @@ public class AI : MonoBehaviour
             {
                 waiting = true;
                 StartCoroutine(FoodMore());
+
+                if (m_Walk == true)
+                {
+                    m_Animator.SetBool("m_Walk", false);
+                    m_Walk = false;
+                }
+                if (m_Eat == false)
+                {
+                    m_Animator.SetBool("m_Eat", true);
+                    m_Eat = true;
+                }
             }
             else if(!waiting)
             {
                 isZero = 0;
                 StartCoroutine(FoodLess());
+
+                if (m_Walk == false)
+                {
+                    m_Animator.SetBool("m_Walk", true);
+                    m_Walk = true;
+                }
+                if (m_Eat == true)
+                {
+                    m_Animator.SetBool("m_Eat", false);
+                    m_Eat = false;
+                }
             }
         }
     }
@@ -152,11 +202,34 @@ public class AI : MonoBehaviour
             {
                 waiting = true;
                 StartCoroutine(SleepMore());
+
+                if (m_Walk == true)
+                {
+                    m_Animator.SetBool("m_Walk", false);
+                    m_Walk = false;
+                }
+                if (m_Sleep == false)
+                {
+                    m_Animator.SetBool("m_Sleep", true);
+                    m_Sleep = true;
+                }
             }
             else if(!waiting)
             {
                 isZero = 0;
                 StartCoroutine(SleepLess());
+
+                if (m_Walk == false)
+                {
+                    m_Animator.SetBool("m_Walk", true);
+                    m_Walk = true;
+                }
+                if (m_Sleep == true)
+                {
+                    m_Animator.SetBool("m_Sleep", false);
+                    m_Sleep = false;
+                }
+
             }
         }
     }
@@ -182,11 +255,33 @@ public class AI : MonoBehaviour
             {
                 waiting = true;
                 StartCoroutine(FunMore());
+
+                if (m_Walk == true)
+                {
+                    m_Animator.SetBool("m_Walk", false);
+                    m_Walk = false;
+                }
+                if (m_Fun == false)
+                {
+                    m_Animator.SetBool("m_Fun", true);
+                    m_Fun = true;
+                }
             }
             else if(!waiting)
             {
                 isZero = 0;
                 StartCoroutine(FunLess());
+
+                if (m_Walk == false)
+                {
+                    m_Animator.SetBool("m_Walk", true);
+                    m_Walk = true;
+                }
+                if (m_Fun == true)
+                {
+                    m_Animator.SetBool("m_Fun", false);
+                    m_Fun = false;
+                }
             }
         }
     }
