@@ -17,7 +17,7 @@ public class AI : MonoBehaviour
     private float sleep;
     private float fun;
 
-    private float drinkN = 0.3f;
+    private float drinkN = 0.35f;
     private float foodN = 0.5f;
     private float sleepN = 0.7f;
     private float funN = 1f;
@@ -252,7 +252,7 @@ public class AI : MonoBehaviour
             sleepBar.fillAmount = (float)sleep / (float)maxStat;
             if (sleep % 5 == 0)
             {
-                yield return new WaitForSeconds(0.7f);
+                yield return new WaitForSeconds(0.5f);
             }
         } while (sleep < maxStat);
         waiting = false;
