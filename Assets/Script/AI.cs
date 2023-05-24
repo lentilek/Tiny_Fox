@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.UI;
 public class AI : MonoBehaviour
 {
     public GameObject target;
@@ -36,6 +36,10 @@ public class AI : MonoBehaviour
     bool m_Sleep = false;
     bool m_Fun = false;
 
+    public Image drinkBar;
+    public Image foodBar;
+    public Image sleepBar;
+    public Image funBar;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -45,6 +49,11 @@ public class AI : MonoBehaviour
         food = maxStat;
         sleep = maxStat;
         fun = maxStat;
+
+        drinkBar.fillAmount = (float)drink/(float)maxStat;
+        foodBar.fillAmount = (float)food / (float)maxStat;
+        sleepBar.fillAmount = (float)sleep / (float)maxStat;
+        funBar.fillAmount = (float)fun / (float)maxStat;
 
         StartCoroutine(DrinkLess());
         StartCoroutine(FoodLess());
@@ -132,7 +141,8 @@ public class AI : MonoBehaviour
         do
         {
             drink++;
-            if(drink%5 == 0)
+            drinkBar.fillAmount = (float)drink / (float)maxStat;
+            if (drink%5 == 0)
             {
                 yield return new WaitForSeconds(0.3f);
             }
@@ -185,6 +195,7 @@ public class AI : MonoBehaviour
         do
         {
             food++;
+            foodBar.fillAmount = (float)food / (float)maxStat;
             if (food % 5 == 0)
             {
                 yield return new WaitForSeconds(0.3f);
@@ -238,6 +249,7 @@ public class AI : MonoBehaviour
         do
         {
             sleep++;
+            sleepBar.fillAmount = (float)sleep / (float)maxStat;
             if (sleep % 5 == 0)
             {
                 yield return new WaitForSeconds(0.7f);
@@ -290,6 +302,7 @@ public class AI : MonoBehaviour
         do
         {
             fun++;
+            funBar.fillAmount = (float)fun / (float)maxStat;
             if (fun % 5 == 0)
             {
                 yield return new WaitForSeconds(0.3f);
@@ -312,8 +325,9 @@ public class AI : MonoBehaviour
         {
             yield return new WaitForSeconds(drinkN);
             drink--;
+            drinkBar.fillAmount = (float)drink / (float)maxStat;
 
-        }while(drink > 0);
+        } while(drink > 0);
         //if (drink <= 0) isZero = 1;
     }
     IEnumerator FoodLess()
@@ -322,6 +336,7 @@ public class AI : MonoBehaviour
         {
             yield return new WaitForSeconds(foodN);
             food--;
+            foodBar.fillAmount = (float)food / (float)maxStat;
 
         } while (food > 0);
         //if (food <= 0) isZero = 2;
@@ -332,6 +347,7 @@ public class AI : MonoBehaviour
         {
             yield return new WaitForSeconds(sleepN);
             sleep --;
+            sleepBar.fillAmount = (float)sleep / (float)maxStat;
 
         } while (sleep > 0);
         //if (sleep <= 0) isZero = 3;
@@ -342,6 +358,7 @@ public class AI : MonoBehaviour
         {
             yield return new WaitForSeconds(funN);
             fun --;
+            funBar.fillAmount = (float)fun / (float)maxStat;
 
         } while (fun > 0);
         //if (fun <= 0) isZero = 4;
