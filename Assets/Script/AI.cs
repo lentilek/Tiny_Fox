@@ -11,7 +11,7 @@ public class AI : MonoBehaviour
     public List<GameObject> targetsIdle = new List<GameObject>();
     private int counter = 0;
 
-    private float maxStat = 100;
+    public float maxStat = 100;
     private float drink;
     private float food;
     private float sleep;
@@ -28,6 +28,8 @@ public class AI : MonoBehaviour
     public GameObject targetFood;
     public GameObject targetSleep;
     public GameObject targetFun;
+
+    private bool waiting = false;
 
     void Start()
     {
@@ -84,33 +86,61 @@ public class AI : MonoBehaviour
         agent.SetDestination(target.transform.position);
         if (Vector3.Distance(transform.position, target.transform.position) < distance)
         {
-            if (drink < maxStat)
+            if (drink < maxStat && !waiting)
             {
-                drink ++;
+                waiting = true;
+                StartCoroutine(DrinkMore());
             }
-            else
+            else if (!waiting)
             {
                 isZero= 0;
                 StartCoroutine(DrinkLess());
             }
         }
     }
+
+    IEnumerator DrinkMore()
+    {
+        do
+        {
+            drink++;
+            if(drink%5 == 0)
+            {
+                yield return new WaitForSeconds(0.3f);
+            }
+        }while(drink < maxStat);
+        waiting= false;
+    }
+
     public void Food()
     {
         target = targetFood;
         agent.SetDestination(target.transform.position);
         if (Vector3.Distance(transform.position, target.transform.position) < distance)
         {
-            if (food < maxStat)
+            if (food < maxStat && !waiting)
             {
-                food ++;
+                waiting = true;
+                StartCoroutine(FoodMore());
             }
-            else
+            else if(!waiting)
             {
                 isZero = 0;
                 StartCoroutine(FoodLess());
             }
         }
+    }
+    IEnumerator FoodMore()
+    {
+        do
+        {
+            food++;
+            if (food % 5 == 0)
+            {
+                yield return new WaitForSeconds(0.3f);
+            }
+        } while (food < maxStat);
+        waiting = false;
     }
     public void Sleep()
     {
@@ -118,16 +148,29 @@ public class AI : MonoBehaviour
         agent.SetDestination(target.transform.position);
         if (Vector3.Distance(transform.position, target.transform.position) < distance)
         {
-            if (sleep < maxStat)
+            if (sleep < maxStat && !waiting)
             {
-                sleep ++;
+                waiting = true;
+                StartCoroutine(SleepMore());
             }
-            else
+            else if(!waiting)
             {
                 isZero = 0;
                 StartCoroutine(SleepLess());
             }
         }
+    }
+    IEnumerator SleepMore()
+    {
+        do
+        {
+            sleep++;
+            if (sleep % 5 == 0)
+            {
+                yield return new WaitForSeconds(0.7f);
+            }
+        } while (sleep < maxStat);
+        waiting = false;
     }
     public void Fun()
     {
@@ -135,18 +178,30 @@ public class AI : MonoBehaviour
         agent.SetDestination(target.transform.position);
         if (Vector3.Distance(transform.position, target.transform.position) < distance)
         {
-            if (fun < maxStat)
+            if (fun < maxStat && !waiting)
             {
-                fun ++;
+                waiting = true;
+                StartCoroutine(FunMore());
             }
-            else
+            else if(!waiting)
             {
                 isZero = 0;
                 StartCoroutine(FunLess());
             }
         }
     }
-
+    IEnumerator FunMore()
+    {
+        do
+        {
+            fun++;
+            if (fun % 5 == 0)
+            {
+                yield return new WaitForSeconds(0.3f);
+            }
+        } while (fun < maxStat);
+        waiting = false;
+    }
     public void ZeroNumber()
     {
         if(drink <= 0) isZero= 1;
