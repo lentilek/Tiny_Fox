@@ -40,6 +40,11 @@ public class AI : MonoBehaviour
     public Image foodBar;
     public Image sleepBar;
     public Image funBar;
+
+    [SerializeField] private AudioSource playSoundEffect;
+    [SerializeField] private AudioSource eatSoundEffect;
+    [SerializeField] private AudioSource drinkSoundEffect;
+    [SerializeField] private AudioSource sleepSoundEffect;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -103,6 +108,7 @@ public class AI : MonoBehaviour
         {
             if (drink < maxStat && !waiting)
             {
+                drinkSoundEffect.Play();
                 waiting = true;
                 StartCoroutine(DrinkMore());
 
@@ -158,6 +164,7 @@ public class AI : MonoBehaviour
         {
             if (food < maxStat && !waiting)
             {
+                eatSoundEffect.Play();
                 waiting = true;
                 StartCoroutine(FoodMore());
 
@@ -211,6 +218,7 @@ public class AI : MonoBehaviour
         {
             if (sleep < maxStat && !waiting)
             {
+                sleepSoundEffect.Play();
                 waiting = true;
                 StartCoroutine(SleepMore());
 
@@ -265,6 +273,7 @@ public class AI : MonoBehaviour
         {
             if (fun < maxStat && !waiting)
             {
+                playSoundEffect.Play();
                 waiting = true;
                 StartCoroutine(FunMore());
 
@@ -283,6 +292,7 @@ public class AI : MonoBehaviour
             {
                 isZero = 0;
                 StartCoroutine(FunLess());
+
 
                 if (m_Walk == false)
                 {
